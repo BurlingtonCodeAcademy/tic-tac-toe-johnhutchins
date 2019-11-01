@@ -23,61 +23,32 @@ let arr = []
 let whichPlayer = playerX
 let text = document.getElementById('playerTurn')
 
-/*     $('.box').click(function() {
+let boxes = document.getElementsByClassName('box')
+for(let i=0;i<boxes.length;i++){
+    boxes[i].addEventListener('click',(e)=>{
         if(whichPlayer === playerX){
-            this.append('X')
-            $(this).addClass('disabled')  
-            whichPlayer.cellsChosen.push(this.id)
-            if(whichPlayer.cellsChosen.length >= 3){
-                cleanInput(whichPlayer.cellsChosen)
+            boxes[i].textContent = 'X'
+            e.target.className += ' disabled'
+            playerX.cellsChosen.push(boxes[i].id)
+            if(playerX.cellsChosen.length >= 3){
+                isArrWinner(playerX.cellsChosen)
                 checkGridFull()
             }
-            text.empty()
-            text.append('It is now player Os turn')
-            return whichPlayer = playerO
-        }
-        if(whichPlayer === playerO){
-            this.append('O')
-            $(this).addClass('disabled')
-            whichPlayer.cellsChosen.push(this.id)
-            if(whichPlayer.cellsChosen.length >= 3){
-                cleanInput(whichPlayer.cellsChosen)
+            whichPlayer = playerO
+        } else if(whichPlayer === playerO){
+            boxes[i].textContent = 'O'
+            e.target.className += ' disabled'
+            playerO.cellsChosen.push(boxes[i].id)
+            if(playerO.cellsChosen.length >= 3){
+                isArrWinner(playerO.cellsChosen)
                 checkGridFull()
             }
-            text.empty()
-            text.append('It is now player Xs turn')
-            return whichPlayer = playerX
+            whichPlayer = playerX
+        } else {
+            console.log("Catch error in a console log?")
         }
-    }); */
-
-    let boxes = document.getElementsByClassName('box')
-    for(let i=0;i<boxes.length;i++){
-        boxes[i].addEventListener('click',(e)=>{
-            if(whichPlayer === playerX){
-                boxes[i].textContent = 'X'
-                e.target.className += ' disabled'
-                playerX.cellsChosen.push(boxes[i].id)
-                if(playerX.cellsChosen.length >= 3){
-                    isArrWinner(playerX.cellsChosen)
-                    checkGridFull()
-                }
-                whichPlayer = playerO
-            } else if(whichPlayer === playerO){
-                boxes[i].textContent = 'O'
-                e.target.className += ' disabled'
-                playerO.cellsChosen.push(boxes[i].id)
-                if(playerO.cellsChosen.length >= 3){
-                    isArrWinner(playerO.cellsChosen)
-                    checkGridFull()
-                }
-                whichPlayer = playerX
-            } else {
-                console.log("Catch error in a console log?")
-            }
-        })
-    }
-
-
+    })
+}
 
 let playAgain = document.getElementById('playAgain')
 playAgain.addEventListener('click',()=>{
