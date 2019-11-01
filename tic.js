@@ -55,15 +55,8 @@ playAgain.addEventListener('click',()=>{
     location.reload()
 })
 
-
-
-function cleanInput(cellsChosenArray){
-    let mutatedArr = cellsChosenArray.sort(function(a, b){return a-b})
-    isArrWinner(mutatedArr)
-}
-
 function isArrWinner(cleanedArr){
-    console.log("array = " + cleanedArr)
+    let winningArr = []
     for(let j=0;j<winningPossibilities.length;j++){
         let isWinner = true
         let arr = winningPossibilities[j]
@@ -71,10 +64,16 @@ function isArrWinner(cleanedArr){
             if(!cleanedArr.includes(arr[i])){
                 isWinner = false
                 break
+            } else if(!winningArr.includes(arr[i])){
+                winningArr.push(arr[i])
+            } else {
+
             }
         }
         if(isWinner){
-            $('.game-board').replaceWith('<img src="http://www.quickmeme.com/img/5d/5db4d3777ccf3c798b0ae2fc7fdda76cc345da3fae63b335647d8f3fd228fda6.jpg"></img>')
+            //add line through the board
+            //$('.game-board').replaceWith('<img src="http://www.quickmeme.com/img/5d/5db4d3777ccf3c798b0ae2fc7fdda76cc345da3fae63b335647d8f3fd228fda6.jpg"></img>')
+            console.log("winning array = " + winningArr)
             console.log("WINNER WINNER WINNER WINNER")
             break
         }
