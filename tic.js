@@ -71,8 +71,11 @@ function isArrWinner(cleanedArr){
             }
         }
         if(isWinner){
+            checkGridFull()
             //add line through the board
             //$('.game-board').replaceWith('<img src="http://www.quickmeme.com/img/5d/5db4d3777ccf3c798b0ae2fc7fdda76cc345da3fae63b335647d8f3fd228fda6.jpg"></img>')
+            let gameBoard = document.getElementById('game-board')
+            gameBoard.classList += 'disabled'
             console.log("winning array = " + winningArr)
             console.log("WINNER WINNER WINNER WINNER")
             break
@@ -97,7 +100,7 @@ function checkGridFull(){
     }
     if(arr.length === 9){
         //$('.game-board').replaceWith('<img src="https://media.makeameme.org/created/yeah-you-guys-8lqkrt.jpg"></img>')
-        let board = document.getElementsByClassName('game-board')
+        //let board = document.getElementsByClassName('game-board')
         console.log("GAME IS FULL")
         return true
     }
