@@ -21,12 +21,14 @@ let winningPossibilities = [
 let arr = []
 let gameBoard = document.getElementById("game-board")
 startGame()
-// if(arr.length === 0){
-//     gameBoard.innerHTML = ' START ? '
-//     gameBoard.addEventListener('click',startGame)
-// } 
+
 function startGame(){
-    console.log("clicked!")
+
+    let playAgain = document.getElementById('playAgain')
+    playAgain.addEventListener('click',()=>{
+        location.reload()
+    })
+
     this.innerHTML = ''
     let whichPlayer = playerX
     let text = document.getElementById('playerTurn')
@@ -61,13 +63,6 @@ function startGame(){
             }
         })
     }
-}
-
-function playAgain(){
-    let playAgain = document.getElementById('playAgain')
-    playAgain.addEventListener('click',()=>{
-        location.reload()
-    })
 }
 
 function isArrWinner(cleanedArr){
