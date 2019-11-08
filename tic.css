@@ -26,11 +26,21 @@
   cursor: none;
 }
 
+.main-heading{
+  color: white;
+  margin: 0 auto;
+  width: fit-content;
+  border: 4px solid green;
+  border-radius: 5px;
+  padding: 1%;
+}
+
 #playerTurn{
   margin: 0 auto;
-  background-color: rgb(46, 14, 223);
+  width: fit-content;
+  background-color: darkgray;
   color: black;
-  border: 5px solid rgb(121, 121, 230);
+  border: 5px solid green;
   width: 50vw;
   height: 10vh;
   display: flex;
@@ -45,6 +55,8 @@ img{
 button{
   margin: 0 auto;
   display: grid;
+  color: green;
+  border: 5px solid darkgray;
 }
 
 body{

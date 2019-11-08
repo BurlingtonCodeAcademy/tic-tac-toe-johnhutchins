@@ -1,6 +1,5 @@
-
 class Player {
-    contructor(name){
+    constructor(name){
         this.name = name
     }
     cellsChosen = []
@@ -20,40 +19,56 @@ let winningPossibilities = [
 ]
 
 let arr = []
-let whichPlayer = playerX
-let text = document.getElementById('playerTurn')
+let gameBoard = document.getElementById("game-board")
+startGame()
+// if(arr.length === 0){
+//     gameBoard.innerHTML = ' START ? '
+//     gameBoard.addEventListener('click',startGame)
+// } 
+function startGame(){
+    console.log("clicked!")
+    this.innerHTML = ''
+    let whichPlayer = playerX
+    let text = document.getElementById('playerTurn')
+    text.innerText = 'Player X Turn'
 
-let boxes = document.getElementsByClassName('box')
-for(let i=0;i<boxes.length;i++){
-    boxes[i].addEventListener('click',(e)=>{
-        if(whichPlayer === playerX){
-            boxes[i].textContent = 'X'
-            e.target.className += ' disabled'
-            playerX.cellsChosen.push(boxes[i].id)
-            if(playerX.cellsChosen.length >= 3){
-                isArrWinner(playerX.cellsChosen)
-                checkGridFull()
+    let boxes = document.getElementsByClassName('box')
+    for(let i=0;i<boxes.length;i++){ 
+        boxes[i].addEventListener('click',(e)=>{
+            arr.push(boxes[i].id)
+            if(whichPlayer === playerX){
+                text.innerText = 'Player O Turn'
+                boxes[i].textContent = 'X'
+                e.target.className += ' disabled'
+                playerX.cellsChosen.push(boxes[i].id)
+                if(playerX.cellsChosen.length >= 3){
+                    checkGridFull()
+                    isArrWinner(playerX.cellsChosen)
+                }
+                whichPlayer = playerO
+            } else if(whichPlayer === playerO){
+                text.innerText = 'Player X Turn'
+                boxes[i].textContent = 'O'
+                e.target.className += ' disabled'
+                playerO.cellsChosen.push(boxes[i].id)
+                if(playerO.cellsChosen.length >= 3){
+                    checkGridFull()
+                    isArrWinner(playerO.cellsChosen)
+                }
+                whichPlayer = playerX
+            } else {
+                console.log("Catch error in a console log?")
             }
-            whichPlayer = playerO
-        } else if(whichPlayer === playerO){
-            boxes[i].textContent = 'O'
-            e.target.className += ' disabled'
-            playerO.cellsChosen.push(boxes[i].id)
-            if(playerO.cellsChosen.length >= 3){
-                isArrWinner(playerO.cellsChosen)
-                checkGridFull()
-            }
-            whichPlayer = playerX
-        } else {
-            console.log("Catch error in a console log?")
-        }
-    })
+        })
+    }
 }
 
-let playAgain = document.getElementById('playAgain')
-playAgain.addEventListener('click',()=>{
-    location.reload()
-})
+function playAgain(){
+    let playAgain = document.getElementById('playAgain')
+    playAgain.addEventListener('click',()=>{
+        location.reload()
+    })
+}
 
 function isArrWinner(cleanedArr){
     let winningArr = []
@@ -71,22 +86,16 @@ function isArrWinner(cleanedArr){
             }
         }
         if(isWinner){
-            checkGridFull()
-            //add line through the board
-            //$('.game-board').replaceWith('<img src="http://www.quickmeme.com/img/5d/5db4d3777ccf3c798b0ae2fc7fdda76cc345da3fae63b335647d8f3fd228fda6.jpg"></img>')
             let gameBoard = document.getElementById('game-board')
-            gameBoard.classList += 'disabled'
+            let playerTurnText = document.getElementById('playerTurn')
+            gameBoard.classList += ' disabled'
+            gameBoard.innerHTML = `<img src="http://www.quickmeme.com/img/5d/5db4d3777ccf3c798b0ae2fc7fdda76cc345da3fae63b335647d8f3fd228fda6.jpg"></img>`
+            playerTurnText.innerHTML ='<h1>' + whichPlayer.name + ' wins!!!!</h1>'
             console.log("winning array = " + winningArr)
             console.log("WINNER WINNER WINNER WINNER")
             break
         }
     }
-
-    winningPossibilities.forEach((arr)=>{
-        if(JSON.stringify(cleanedArr) === JSON.stringify(arr)){
-            console.log("weiner")
-        }
-    })
 }
 
 function checkGridFull(){
@@ -99,9 +108,24 @@ function checkGridFull(){
         }
     }
     if(arr.length === 9){
-        //$('.game-board').replaceWith('<img src="https://media.makeameme.org/created/yeah-you-guys-8lqkrt.jpg"></img>')
-        //let board = document.getElementsByClassName('game-board')
-        console.log("GAME IS FULL")
+        let board = document.getElementById('game-board')
+        board.innerHTML = '<img src="https://media.makeameme.org/created/yeah-you-guys-8lqkrt.jpg"></img>'
         return true
+    }
+}
+
+let count = 5
+
+function timer(){
+    setInterval(countDown,1000)
+}
+
+function countDown(){
+    if(count <= 0){
+        clearInterval(countDown)
+        count = 5
+    } else {
+        count--
+        console.log("Count = " + count)
     }
 }
